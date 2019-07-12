@@ -27,7 +27,6 @@ export const ProductTable = (props) => {
                 )
             }
             </tbody>
-
         </table>
     );
 };
