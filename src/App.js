@@ -1,9 +1,13 @@
 import React from 'react';
-import ProductsAndSuppliers from './ProductsAndSuppliers';
+import ProductsAndSuppliers from './ProductsAndSuppliers'
+import {Provider} from "react-redux";
+import dataStore from "./store";
 
 function App() {
     return (
-        <ProductsAndSuppliers />
+        <Provider store={dataStore}>
+            <ProductsAndSuppliers/>
+        </Provider>
     );
 }
 
