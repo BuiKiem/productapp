@@ -1,62 +1,74 @@
-import React, { Component } from 'react';
-import { SupplierEditor } from "./SupplierEditor";
-import { SupplierTable } from "./SupplierTable";
+import React, {Component} from 'react';
+import {SupplierEditor} from "./SupplierEditor";
+import {SupplierTable} from "./SupplierTable"
+import {connect} from "react-redux";
+import {saveSupplier, deleteSupplier} from "./store";
 
+const mapStateToProps = (storeData) => ({suppliers: storeData.suppliers});
 
-export class SupplierDisplay extends Component {
+const mapDispatchToProps = {
+    saveCallback: saveSupplier,
+    deleteCallback: deleteSupplier,
+};
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            showEditor: false,
-            selected: null,
-        }
-    };
+const connectFunction = connect(mapStateToProps, mapDispatchToProps);
 
-    startEditing = (supplier) => {
-        this.setState({ showEditor: true, selected: supplier })
-    };
+export const SupplierDisplay = connectFunction(
+    class extends Component {
 
-    createSupplier = () => {
-        this.setState({ showEditor: true, selected: {} })
-    };
+        constructor(props) {
+            super(props);
+            this.state = {
+                showEditor: false,
+                selected: null,
+            }
+        };
 
-    cancelEditing = () => {
-        this.setState({ showEditor: false, selected: null })
-    };
+        startEditing = (supplier) => {
+            this.setState({showEditor: true, selected: supplier})
+        };
 
-    saveSupplier= (supplier) => {
-        this.props.saveCallback(supplier);
-        this.setState({ showEditor: false, selected: null })
-    };
+        createSupplier = () => {
+            this.setState({showEditor: true, selected: {}})
+        };
 
-    render() {
-        if (this.state.showEditor) {
-            return (
-                <SupplierEditor
-                    key={ this.state.selected.id || -1 }
-                    supplier={ this.state.selected }
-                    saveCallback={ this.saveSupplier }
-                    cancelCallback={ this.cancelEditing }
-                />
-            );
-        } else {
-            return (
-                <div className="m-2">
-                    <SupplierTable
-                        suppliers={ this.props.suppliers }
-                        editCallback={ this.startEditing }
-                        deleteCallback={ this.props.deleteCallback }
+        cancelEditing = () => {
+            this.setState({showEditor: false, selected: null})
+        };
+
+        saveSupplier = (supplier) => {
+            this.props.saveCallback(supplier);
+            this.setState({showEditor: false, selected: null})
+        };
+
+        render() {
+            if (this.state.showEditor) {
+                return (
+                    <SupplierEditor
+                        key={this.state.selected.id || -1}
+                        supplier={this.state.selected}
+                        saveCallback={this.saveSupplier}
+                        cancelCallback={this.cancelEditing}
                     />
-                    <div className="text-center">
-                        <button className="btn btn-primary m-1" onClick={ this.createSupplier }>
-                            Create Supplier
-                        </button>
+                );
+            } else {
+                return (
+                    <div className="m-2">
+                        <SupplierTable
+                            suppliers={this.props.suppliers}
+                            editCallback={this.startEditing}
+                            deleteCallback={this.props.deleteCallback}
+                        />
+                        <div className="text-center">
+                            <button className="btn btn-primary m-1" onClick={this.createSupplier}>
+                                Create Supplier
+                            </button>
+                        </div>
                     </div>
-                </div>
 
-            );
+                );
+            }
         }
-    }
 
-}
+    }
+);
