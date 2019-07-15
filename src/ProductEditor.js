@@ -33,17 +33,17 @@ export class ProductEditor extends Component {
                 </div>
                 <div className="form-group">
                     <label htmlFor="input-name">Name</label>
-                    <input type="text" className='form-control' id='input-name' name='name' disabled
+                    <input type="text" className='form-control' id='input-name' name='name'
                            value={ this.state.formData.name } onChange={ this.handleChange }/>
                 </div>
                 <div className="form-group">
                     <label htmlFor="input-category">Category</label>
-                    <input type="text" className='form-control' id='input-category' name='category' disabled
+                    <input type="text" className='form-control' id='input-category' name='category'
                            value={ this.state.formData.category } onChange={ this.handleChange }/>
                 </div>
                 <div className="form-group">
                     <label htmlFor="input-price">Price</label>
-                    <input type="text" className='form-control' id='input-price' name='price' disabled
+                    <input type="text" className='form-control' id='input-price' name='price'
                            value={ this.state.formData.price } onChange={ this.handleChange }/>
                 </div>
                 <div className="text-center">
