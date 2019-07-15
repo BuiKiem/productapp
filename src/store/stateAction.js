@@ -16,7 +16,7 @@ export const startEditingSupplier = (supplier) => ({
     payload: supplier,
 });
 
-export const endEditting = () => ({type:STATE_END_EDITING});
+export const endEditing = () => ({type:STATE_END_EDITING});
 
 export const startCreatingProduct = () => ({
     type: STATE_START_CREATING,
